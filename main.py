@@ -15,6 +15,7 @@ display = pygame.Surface((300, 200))
 
 player_image = pygame.image.load('Megaman.png')
 grass_image = pygame.image.load('grass.png')
+TILE_SIZE = grass_image.get_width()
 dirt_image = pygame.image.load('dirt.png')
 
 game_map = [['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'],
@@ -45,6 +46,20 @@ while True:
 
     # this fixes the trail of the player by adding a background color
     display.fill((146, 244, 255))
+
+    tile_rects = []
+    y = 0
+    for row in game_map:
+        x = 0
+        for tile in row:
+            if tile == '1':
+                display.blit(dirt_image, (x * TILE_SIZE, y * TILE_SIZE))
+            if tile == '2':
+                display.blit(grass_image, (x * TILE_SIZE, y * TILE_SIZE))
+            if tile != '0':
+                tile_rects.append(pygame.Rect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE))
+            x += 1
+        y += 1
 
     display.blit(player_image, player_location)
 
