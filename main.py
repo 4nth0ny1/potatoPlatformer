@@ -8,9 +8,10 @@ pygame.init()
 
 pygame.display.set_caption('Potato Platformer')
 
-WINDOW_SIZE = (400, 400)
+WINDOW_SIZE = (600, 400)
 
 screen = pygame.display.set_mode(WINDOW_SIZE, 0, 32)
+display = pygame.Surface((300, 200))
 
 player_image = pygame.image.load('Megaman.png')
 grass_image = pygame.image.load('grass.png')
@@ -43,9 +44,9 @@ test_rect = pygame.Rect(100, 100, 100, 50)
 while True:
 
     # this fixes the trail of the player by adding a background color
-    screen.fill((146, 244, 255))
+    display.fill((146, 244, 255))
 
-    screen.blit(player_image, player_location)
+    display.blit(player_image, player_location)
 
     player_y_momentum += 0.2
     player_location[1] += player_y_momentum
@@ -77,5 +78,7 @@ while True:
             if event.key == K_LEFT:
                 moving_left = False
 
+    surf = pygame.transform.scale(display, WINDOW_SIZE)
+    screen.blit(surf, (0, 0))
     pygame.display.update()
     clock.tick(60)
