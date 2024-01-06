@@ -13,15 +13,20 @@ screen = pygame.display.set_mode(WINDOW_SIZE, 0, 32)
 
 player_image = pygame.image.load('Megaman.png')
 
+# sets the initial state of movement for the player. if one of these was true the player would be moving on auto.
 moving_right = False
 moving_left = False
 
 player_location = [50, 50]
 
 while True:
+
+    # this fixes the trail of the player by adding a background color
     screen.fill((146, 244, 255))
 
     screen.blit(player_image, player_location)
+
+    # this shows how far the player will move with pressing the keys
     if moving_right == True:
         player_location[0] += 4
     if moving_left == True:
@@ -32,6 +37,7 @@ while True:
             pygame.quit()
             sys.exit()
 
+        # keyboard input for movement
         if event.type == KEYDOWN:
             if event.key == K_RIGHT:
                 moving_right = True
